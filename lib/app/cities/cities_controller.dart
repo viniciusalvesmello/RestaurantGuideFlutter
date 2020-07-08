@@ -9,7 +9,7 @@ part 'cities_controller.g.dart';
 class CitiesController = _CitiesControllerBase with _$CitiesController;
 
 abstract class _CitiesControllerBase with Store {
-  final citiesRepository = Modular.get<CitiesRepository>();
+  final ICitiesRepository citiesRepository = Modular.get();
 
   @observable
   List<City> cities = [];

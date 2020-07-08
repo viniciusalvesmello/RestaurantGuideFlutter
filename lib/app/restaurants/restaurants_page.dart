@@ -5,7 +5,12 @@ import 'restaurants_controller.dart';
 class RestaurantsPage extends StatefulWidget {
   final String title;
   final String cityId;
-  const RestaurantsPage({Key key, this.title = "Restaurants", this.cityId = "0"})
+  final String cityName;
+  const RestaurantsPage(
+      {Key key,
+      this.title = "Os melhores restaurants de",
+      this.cityId = "0",
+      this.cityName = ""})
       : super(key: key);
 
   @override
@@ -14,13 +19,37 @@ class RestaurantsPage extends StatefulWidget {
 
 class _RestaurantsPageState
     extends ModularState<RestaurantsPage, RestaurantsController> {
-      
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    var appBarRestaurants = AppBar(
+      toolbarHeight: 120,
+      title: Column(
+        children: [
+          Row(children: [
+            Expanded(
+              child: Center(
+                child: Text(widget.title,
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 16)),
+              ),
+            ),
+          ]),
+          Row(children: [
+            Expanded(
+              child: Center(
+                child: Text(
+                  widget.cityName,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+            ),
+          ]),
+        ],
       ),
+    );
+
+    return Scaffold(
+      appBar: appBarRestaurants,
       body: Column(
         children: <Widget>[Text("Cidade Id: ${widget.cityId}")],
       ),

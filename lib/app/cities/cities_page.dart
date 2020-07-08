@@ -19,7 +19,6 @@ class CitiesPage extends StatefulWidget {
 }
 
 class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
-  final citiesController = Modular.get<CitiesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +51,8 @@ class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
       appBar: appBarCities,
       body: Observer(builder: (_) {
         var listCities = <Widget>[];
-        citiesController.getCities();
-        for (var rowCity in citiesController.cities) {
+        controller.getCities();
+        for (var rowCity in controller.cities) {
           listCities.add(CityWidget(
             city: rowCity,
           ));

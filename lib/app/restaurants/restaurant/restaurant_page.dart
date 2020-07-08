@@ -12,8 +12,6 @@ class RestaurantPage extends StatefulWidget {
 
 class _RestaurantPageState
     extends ModularState<RestaurantPage, RestaurantController> {
-  //use 'controller' variable to access controller
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

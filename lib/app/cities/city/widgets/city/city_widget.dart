@@ -1,5 +1,6 @@
 import 'package:RestaurantGuideFlutter/app/cities/city/model/city_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CityWidget extends StatelessWidget {
   final City city;
@@ -33,7 +34,7 @@ class CityWidget extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, "/cities/city/restaurants/${city.id}");
+          Modular.to.pushNamed("/restaurants/${city.id}/${city.name}");
         },
         child: Card(
           margin: EdgeInsets.only(top: 16, left: 16, right: 16),

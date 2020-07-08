@@ -1,22 +1,27 @@
-
+import 'package:RestaurantGuideFlutter/app/core/services/client_http_service.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_model.dart';
-import 'package:dio/native_imp.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
-abstract class IRestaurantsRepository extends Disposable {
-  List<Restaurant> getRestaurants({int cityId});
+abstract class IRestaurantsRepository {
+  Future<List<Restaurant>> getRestaurants({int cityId});
 }
 
 class RestaurantsRepository implements IRestaurantsRepository {
-  final DioForNative client;
+  final IClientHttpService client;
 
   RestaurantsRepository(this.client);
 
   @override
-  List<Restaurant> getRestaurants({int cityId}) {
-    return [];
-  }
+  Future<List<Restaurant>> getRestaurants({int cityId}) async {
+    var json = await client.get("/api/v2.1/search");
 
-  @override
-  void dispose() {}
+    var listRestaurants = [];
+
+    if (json["restaurants"] != null) {
+      listRestaurants = (json["restaurants"] as List)
+          .map((item) => Restaurant.fromJson(item))
+          .toList();
+    }
+
+    return listRestaurants;
+  }
 }
