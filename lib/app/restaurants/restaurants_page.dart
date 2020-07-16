@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'restaurants_controller.dart';
 
@@ -48,11 +49,22 @@ class _RestaurantsPageState
       ),
     );
 
+    controller.getRestaurants(cityId: int.parse(widget.cityId));
+
     return Scaffold(
       appBar: appBarRestaurants,
-      body: Column(
-        children: <Widget>[Text("Cidade Id: ${widget.cityId}")],
-      ),
+      body: Observer(builder: (_) {
+        var list = <Widget>[];
+        list.add(Text("Cidade Id: ${widget.cityId}"));
+
+        for (var row in controller.listRestaurant) {
+          list.add(Text("Restaurant: ${row.id} - ${row.name}"));
+        }
+
+        return ListView(
+          children: list,
+        );
+      }),
     );
   }
 }

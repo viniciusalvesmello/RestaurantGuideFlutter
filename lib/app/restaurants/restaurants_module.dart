@@ -8,7 +8,9 @@ import 'restaurants_page.dart';
 class RestaurantsModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => RestaurantsRepository(i.get<IClientHttpService>())),
+        Bind<IRestaurantsRepository>((i) => RestaurantsRepository(
+              i.get<IClientHttpService>(),
+            )),
         Bind((i) => RestaurantsController()),
       ];
 

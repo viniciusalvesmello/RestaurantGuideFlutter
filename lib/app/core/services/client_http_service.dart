@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dio/native_imp.dart';
 
 import 'client_http_interceptor.dart';
 
