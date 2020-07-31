@@ -1,4 +1,4 @@
-import 'package:RestaurantGuideFlutter/app/cities/city/widgets/city/city_widget.dart';
+import 'package:RestaurantGuideFlutter/app/cities/city/widgets/card_city_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,7 +19,6 @@ class CitiesPage extends StatefulWidget {
 }
 
 class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
-
   @override
   Widget build(BuildContext context) {
     var appBarCities = AppBar(
@@ -53,7 +52,7 @@ class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
         var listCities = <Widget>[];
         controller.getCities();
         for (var rowCity in controller.cities) {
-          listCities.add(CityWidget(
+          listCities.add(CardCityWidget(
             city: rowCity,
           ));
         }

@@ -1,3 +1,4 @@
+import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/widgets/card_restaurant_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -58,7 +59,10 @@ class _RestaurantsPageState
         list.add(Text("Cidade Id: ${widget.cityId}"));
 
         for (var row in controller.listRestaurant) {
-          list.add(Text("Restaurant: ${row.id} - ${row.name}"));
+          //list.add(Text("Restaurant: ${row.id} - ${row.name}"));
+          list.add(CardRestaurantWidget(
+            restaurant: row,
+          ));
         }
 
         return ListView(

@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  cached_network_image: ^2.2.0+1
+  transparent_image: ^1.0.0
   dio: ^3.0.9
   flutter_mobx: ^1.1.0+1
   mobx: ^1.2.1+1
@@ -50,6 +52,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
 vars: 
     clean: flutter clean
     get: flutter pub get
@@ -58,10 +62,6 @@ scripts:
     mobx_build: $clean & $get & $runner build --delete-conflicting-outputs
     mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
