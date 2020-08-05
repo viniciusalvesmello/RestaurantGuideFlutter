@@ -54,21 +54,24 @@ class _RestaurantsPageState
 
     return Scaffold(
       appBar: appBarRestaurants,
-      body: Observer(builder: (_) {
-        var list = <Widget>[];
-        list.add(Text("Cidade Id: ${widget.cityId}"));
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 16.0),
+          child: Observer(builder: (_) {
+            var list = <Widget>[];
 
-        for (var row in controller.listRestaurant) {
-          //list.add(Text("Restaurant: ${row.id} - ${row.name}"));
-          list.add(CardRestaurantWidget(
-            restaurant: row,
-          ));
-        }
+            for (var row in controller.listRestaurant) {
+              list.add(CardRestaurantWidget(
+                restaurant: row,
+              ));
+            }
 
-        return ListView(
-          children: list,
-        );
-      }),
+            return ListView(
+              children: list,
+            );
+          }),
+        ),
+      ),
     );
   }
 }

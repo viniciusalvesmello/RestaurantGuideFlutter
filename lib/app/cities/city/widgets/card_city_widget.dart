@@ -1,7 +1,7 @@
 import 'package:RestaurantGuideFlutter/app/cities/city/model/city_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class CardCityWidget extends StatelessWidget {
   final City city;
@@ -16,16 +16,18 @@ class CardCityWidget extends StatelessWidget {
           topRight: Radius.circular(4.0),
           topLeft: Radius.circular(4.0),
         ),
-        child: Stack(
-          children: <Widget>[
-            Center(child: Image.asset('assets/images/loading.gif')),
-            Center(
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: city.imageUrl,
-              ),
+        child: Expanded(
+          child: CachedNetworkImage(
+            imageUrl: city.imageUrl,
+            placeholder: (context, url) => new Center(
+              child: Image.asset('assets/images/loading.gif'),
             ),
-          ],
+            errorWidget: (context, url, error) => new Center(
+              child: Image.asset('assets/images/no_image.png'),
+            ),
+            height: 160,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

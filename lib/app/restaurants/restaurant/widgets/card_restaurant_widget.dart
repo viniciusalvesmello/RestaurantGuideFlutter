@@ -1,6 +1,6 @@
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class CardRestaurantWidget extends StatelessWidget {
   final Restaurant restaurant;
@@ -19,58 +19,49 @@ class CardRestaurantWidget extends StatelessWidget {
           topLeft: Radius.circular(4.0),
           bottomLeft: Radius.circular(4.0),
         ),
-        child: Stack(
-          children: <Widget>[
-            Center(child: Image.asset('assets/images/loading.gif')),
-            Expanded(
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: restaurant.image,
-                width: 100,
-                height: 90,
-                fit: BoxFit.cover,
-              ),
+        child: Expanded(
+          child: CachedNetworkImage(
+            imageUrl: restaurant.image,
+            placeholder: (context, url) => new Center(
+              child: Image.asset('assets/images/loading.gif'),
             ),
-          ],
+            errorWidget: (context, url, error) => new Center(
+              child: Image.asset('assets/images/no_image.png'),
+            ),
+            width: 100,
+            height: 90,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
 
     var restaurantDescription = Expanded(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: Column(
-            children: [
-              Row(children: [
-                Text(
-                  "${restaurant.userRating.rating} - ${restaurant.userRating.ratingDescription}",
-                  style: TextStyle(fontSize: 8),
-                )
-              ]),
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Row(children: [
-                  Text(
-                    restaurant.name,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ]),
+      child: Padding(
+        padding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                "${restaurant.userRating.rating} - ${restaurant.userRating.ratingDescription}",
+                style: TextStyle(fontSize: 8),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
-                child: Row(children: [
-                  Center(
-                    child: Text(
-                      restaurant.location.address,
-                      style: TextStyle(fontSize: 10),
-                    ),
-                  ),
-                ]),
+                padding: EdgeInsets.only(top: 8.0),
+                child: Text(
+                  restaurant.name,
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-            ],
-          ),
-        ),
+              Padding(
+                padding: EdgeInsets.only(top: 4.0),
+                child: Text(
+                  restaurant.location.address,
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
+            ]),
       ),
     );
 

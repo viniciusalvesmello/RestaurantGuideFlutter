@@ -46,21 +46,25 @@ class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
       ),
     );
 
+    controller.getCities();
+
     return Scaffold(
       appBar: appBarCities,
-      body: Observer(builder: (_) {
-        var listCities = <Widget>[];
-        controller.getCities();
-        for (var rowCity in controller.cities) {
-          listCities.add(CardCityWidget(
-            city: rowCity,
-          ));
-        }
+      body: SafeArea(
+        child: Observer(builder: (_) {
+          var listCities = <Widget>[];
 
-        return ListView(
-          children: listCities,
-        );
-      }),
+          for (var rowCity in controller.cities) {
+            listCities.add(CardCityWidget(
+              city: rowCity,
+            ));
+          }
+
+          return ListView(
+            children: listCities,
+          );
+        }),
+      ),
     );
   }
 }
