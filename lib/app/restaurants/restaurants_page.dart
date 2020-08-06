@@ -63,42 +63,46 @@ class _RestaurantsPageState
         child: Padding(
           padding: EdgeInsets.only(bottom: 16.0),
           child: Observer(builder: (_) {
-            if (!controller.isFirstLoading) {
-              return ListView.builder(
-                itemCount: controller.listRestaurant.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == controller.listRestaurant.length - 1) {
-                    page++;
+            try {
+              if (!controller.isFirstLoading) {
+                return ListView.builder(
+                  itemCount: controller.listRestaurant.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index == controller.listRestaurant.length - 1) {
+                      page++;
 
-                    controller.getRestaurants(
-                      cityId: int.parse(widget.cityId),
-                      start: page * count,
-                    );
-                  }
+                      controller.getRestaurants(
+                        cityId: int.parse(widget.cityId),
+                        start: page * count,
+                      );
+                    }
 
-                  if (!controller.loading) {
-                    return CardRestaurantWidget(
-                      restaurant: controller.listRestaurant[index],
-                    );
-                  } else {
-                    return Column(
-                      children: <Widget>[
-                        CardRestaurantWidget(
-                          restaurant: controller.listRestaurant[index],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                          child: Center(
-                            child: CircularProgressIndicator(),
+                    if (!controller.loading) {
+                      return CardRestaurantWidget(
+                        restaurant: controller.listRestaurant[index],
+                      );
+                    } else {
+                      return Column(
+                        children: <Widget>[
+                          CardRestaurantWidget(
+                            restaurant: controller.listRestaurant[index],
                           ),
-                        ),
-                      ],
-                    );
-                  }
-                },
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
+                          Padding(
+                            padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            } catch (e) {
+              return Text(e.toString());
             }
           }),
         ),
