@@ -12,11 +12,25 @@ abstract class _RestaurantsControllerBase with Store {
   final IRestaurantsRepository repository = Modular.get();
 
   @observable
+  bool loading = false;
+
+  @observable
   ObservableList<Restaurant> listRestaurant = ObservableList<Restaurant>.of([]);
+
+  @computed
+  bool get isFirstLoading {
+    return loading && listRestaurant.isEmpty;
+  }
 
   @action
   Future<void> getRestaurants(
       {int cityId = 0, int count = 10, start = 0}) async {
+    loading = true;
+
+    if (start == 0) {
+      listRestaurant.clear();
+    }
+
     listRestaurant.addAll(
       await repository.getRestaurants(
         cityId: cityId,
@@ -24,5 +38,7 @@ abstract class _RestaurantsControllerBase with Store {
         start: start,
       ),
     );
+
+    loading = false;
   }
 }

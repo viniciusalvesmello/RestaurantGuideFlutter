@@ -23,27 +23,30 @@ class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
   Widget build(BuildContext context) {
     var appBarCities = AppBar(
       toolbarHeight: 120,
-      title: Column(
-        children: [
-          Row(children: [
-            Expanded(
-              child: Center(
-                child: Text(widget.title),
+      title: Wrap(children: [
+        Expanded(
+          child: Center(
+            child: Text(
+              widget.title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
-          ]),
-          Row(children: [
-            Expanded(
-              child: Center(
-                child: Text(
-                  widget.description,
-                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-                ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Text(
+              widget.description,
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
               ),
             ),
-          ]),
-        ],
-      ),
+          ),
+        ),
+      ]),
     );
 
     controller.getCities();

@@ -12,7 +12,7 @@ class CardRestaurantWidget extends StatelessWidget {
     var restaurantImage = ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 100,
-        maxHeight: 90,
+        maxHeight: 108,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -29,7 +29,7 @@ class CardRestaurantWidget extends StatelessWidget {
               child: Image.asset('assets/images/no_image.png'),
             ),
             width: 100,
-            height: 90,
+            height: 108,
             fit: BoxFit.cover,
           ),
         ),
@@ -43,15 +43,18 @@ class CardRestaurantWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(
-                "${restaurant.userRating.rating} - ${restaurant.userRating.ratingDescription}",
-                style: TextStyle(fontSize: 8),
+              Padding(
+                padding: EdgeInsets.only(top: 4.0),
+                child: Text(
+                  "${restaurant.userRating.rating} - ${restaurant.userRating.ratingDescription}",
+                  style: TextStyle(fontSize: 8),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 8.0),
                 child: Text(
                   restaurant.name,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 14),
                 ),
               ),
               Padding(
@@ -71,6 +74,7 @@ class CardRestaurantWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           child: Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
               restaurantImage,
               restaurantDescription,
