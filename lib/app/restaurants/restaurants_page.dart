@@ -50,7 +50,12 @@ class _RestaurantsPageState
       ),
     );
 
-    controller.getRestaurants(cityId: int.parse(widget.cityId));
+    var page = 1;
+    var count = 10;
+    controller.getRestaurants(
+      cityId: int.parse(widget.cityId),
+      count: count,
+    );
 
     return Scaffold(
       appBar: appBarRestaurants,
@@ -59,22 +64,42 @@ class _RestaurantsPageState
           padding: EdgeInsets.only(bottom: 16.0),
           child: Observer(builder: (_) {
             if (!controller.isFirstLoading) {
-              var list = <Widget>[];
+              return ListView.builder(
+                itemCount: controller.listRestaurant.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == controller.listRestaurant.length - 1) {
+                    page++;
 
-              for (var row in controller.listRestaurant) {
-                list.add(CardRestaurantWidget(
-                  restaurant: row,
-                ));
-              }
+                    controller.getRestaurants(
+                      cityId: int.parse(widget.cityId),
+                      start: page * count,
+                    );
+                  }
 
-              if (!controller.loading) {
-                return ListView(
-                  children: list,
-                );
-              }
+                  if (!controller.loading) {
+                    return CardRestaurantWidget(
+                      restaurant: controller.listRestaurant[index],
+                    );
+                  } else {
+                    return Column(
+                      children: <Widget>[
+                        CardRestaurantWidget(
+                          restaurant: controller.listRestaurant[index],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                },
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
             }
-
-            return Center(child: CircularProgressIndicator());
           }),
         ),
       ),
