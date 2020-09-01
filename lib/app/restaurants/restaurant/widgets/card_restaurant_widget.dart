@@ -1,6 +1,7 @@
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CardRestaurantWidget extends StatelessWidget {
   final Restaurant restaurant;
@@ -19,19 +20,17 @@ class CardRestaurantWidget extends StatelessWidget {
           topLeft: Radius.circular(4.0),
           bottomLeft: Radius.circular(4.0),
         ),
-        child: Expanded(
-          child: CachedNetworkImage(
-            imageUrl: restaurant.image,
-            placeholder: (context, url) => new Center(
-              child: Image.asset('assets/images/loading.gif'),
-            ),
-            errorWidget: (context, url, error) => new Center(
-              child: Image.asset('assets/images/no_image.png'),
-            ),
-            width: 100,
-            height: 108,
-            fit: BoxFit.cover,
+        child: CachedNetworkImage(
+          imageUrl: restaurant.image,
+          placeholder: (context, url) => new Center(
+            child: Image.asset('assets/images/loading.gif'),
           ),
+          errorWidget: (context, url, error) => new Center(
+            child: Image.asset('assets/images/no_image.png'),
+          ),
+          width: 100,
+          height: 108,
+          fit: BoxFit.cover,
         ),
       ),
     );
@@ -72,7 +71,10 @@ class CardRestaurantWidget extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.only(top: 16, left: 16, right: 16),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Modular.link
+                .pushNamed("/restaurant/${restaurant.id}/${restaurant.name}");
+          },
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [

@@ -1,4 +1,6 @@
 import 'package:RestaurantGuideFlutter/app/core/services/client_http_service.dart';
+import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/restaurant_controller.dart';
+import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/restaurant_page.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurants_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -12,15 +14,23 @@ class RestaurantsModule extends ChildModule {
               i.get<IClientHttpService>(),
             )),
         Bind((i) => RestaurantsController()),
+        Bind((i) => RestaurantController()),
       ];
 
   @override
-  List<Router> get routers => [
-        Router(
+  List<ModularRouter> get routers => [
+        ModularRouter(
           "/:cityId/:cityName",
           child: (_, args) => RestaurantsPage(
             cityId: args.params["cityId"],
             cityName: args.params["cityName"],
+          ),
+        ),
+        ModularRouter(
+          "/restaurant/:restaurantId/:restaurantName",
+          child: (_, args) => RestaurantPage(
+            restaurantId: args.params["restaurantId"],
+            restaurantName: args.params["restaurantName"],
           ),
         ),
       ];

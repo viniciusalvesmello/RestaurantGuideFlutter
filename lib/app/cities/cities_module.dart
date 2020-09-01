@@ -13,9 +13,10 @@ class CitiesModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => CitiesPage()),
-        Router("/restaurants/:cityId/:cityName", module: RestaurantsModule(), transition: TransitionType.fadeIn)
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute, child: (_, args) => CitiesPage()),
+        ModularRouter("/restaurants/:cityId/:cityName",
+            module: RestaurantsModule(), transition: TransitionType.fadeIn)
       ];
 
   static Inject get to => Inject<CitiesModule>.of();

@@ -13,10 +13,13 @@ class AppModule extends MainModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute,
-            module: CitiesModule(), transition: TransitionType.fadeIn),
-        Router("/restaurants/", module: RestaurantsModule())
+  List<ModularRouter> get routers => [
+        ModularRouter(
+          Modular.initialRoute,
+          module: CitiesModule(),
+          transition: TransitionType.fadeIn,
+        ),
+        ModularRouter("/restaurants/", module: RestaurantsModule())
       ];
 
   @override

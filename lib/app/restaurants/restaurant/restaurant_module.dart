@@ -10,8 +10,9 @@ class RestaurantModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => RestaurantPage()),
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute,
+            child: (_, args) => RestaurantPage()),
       ];
 
   static Inject get to => Inject<RestaurantModule>.of();
