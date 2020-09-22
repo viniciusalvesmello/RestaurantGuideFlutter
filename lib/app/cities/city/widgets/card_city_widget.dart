@@ -17,13 +17,13 @@ class CardCityWidget extends StatelessWidget {
           topLeft: Radius.circular(4.0),
         ),
         child: CachedNetworkImage(
-          imageUrl: city.imageUrl,
           placeholder: (context, url) => new Center(
             child: Image.asset('assets/images/loading.gif'),
           ),
           errorWidget: (context, url, error) => new Center(
             child: Image.asset('assets/images/no_image.png'),
           ),
+          imageUrl: city.imageUrl,
           height: 160,
           fit: BoxFit.cover,
         ),
