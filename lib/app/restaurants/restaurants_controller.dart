@@ -11,6 +11,9 @@ class RestaurantsController = _RestaurantsControllerBase
 abstract class _RestaurantsControllerBase with Store {
   final IRestaurantsRepository repository = Modular.get();
 
+  var page = 1;
+  var count = 10;
+
   @observable
   bool loading = false;
 

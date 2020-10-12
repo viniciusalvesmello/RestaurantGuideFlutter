@@ -1,4 +1,4 @@
-import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/widgets/card_restaurant_widget.dart';
+import 'package:RestaurantGuideFlutter/widgets/card_restaurant_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -21,6 +21,8 @@ class RestaurantsPage extends StatefulWidget {
 
 class _RestaurantsPageState
     extends ModularState<RestaurantsPage, RestaurantsController> {
+  var openScreen = true;
+
   @override
   Widget build(BuildContext context) {
     var appBarRestaurants = AppBar(
@@ -50,12 +52,15 @@ class _RestaurantsPageState
       ),
     );
 
-    var page = 1;
-    var count = 10;
-    controller.getRestaurants(
-      cityId: int.parse(widget.cityId),
-      count: count,
-    );
+    if (openScreen) {
+      controller.page = 1;
+      controller.count = 10;
+      controller.getRestaurants(
+        cityId: int.parse(widget.cityId),
+        count: controller.count,
+      );
+      openScreen = false;
+    }
 
     return Scaffold(
       appBar: appBarRestaurants,
@@ -69,11 +74,11 @@ class _RestaurantsPageState
                   itemCount: controller.listRestaurant.length,
                   itemBuilder: (BuildContext context, int index) {
                     if (index == controller.listRestaurant.length - 1) {
-                      page++;
+                      controller.page++;
 
                       controller.getRestaurants(
                         cityId: int.parse(widget.cityId),
-                        start: page * count,
+                        start: controller.page * controller.count,
                       );
                     }
 

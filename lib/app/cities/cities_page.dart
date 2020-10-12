@@ -1,4 +1,4 @@
-import 'package:RestaurantGuideFlutter/app/cities/city/widgets/card_city_widget.dart';
+import 'package:RestaurantGuideFlutter/widgets/card_city_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,25 +24,21 @@ class _CitiesPageState extends ModularState<CitiesPage, CitiesController> {
     var appBarCities = AppBar(
       toolbarHeight: 120,
       title: Wrap(children: [
-        Expanded(
-          child: Center(
-            child: Text(
-              widget.title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+        Center(
+          child: Text(
+            widget.title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
             ),
           ),
         ),
-        Expanded(
-          child: Center(
-            child: Text(
-              widget.description,
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 14,
-              ),
+        Center(
+          child: Text(
+            widget.description,
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
             ),
           ),
         ),
