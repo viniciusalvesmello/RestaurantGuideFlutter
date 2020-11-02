@@ -1,3 +1,4 @@
+import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_category_model.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_model.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurants_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -15,20 +16,40 @@ abstract class _RestaurantsControllerBase with Store {
   var count = 10;
 
   @observable
-  bool loading = false;
+  bool loadingRestaurantsCategories = false;
+
+  @observable
+  ObservableList<RestaurantCategory> listRestaurantsCategories =
+      ObservableList<RestaurantCategory>.of([]);
+
+  @action
+  Future<void> getRestaurantsCaretories() async {
+    loadingRestaurantsCategories = true;
+    listRestaurantsCategories.clear();
+    listRestaurantsCategories.addAll(
+      await repository.getRestaurantsCategories(),
+    );
+    loadingRestaurantsCategories = false;
+  }
+
+  @observable
+  bool loadingRestaurants = false;
 
   @observable
   ObservableList<Restaurant> listRestaurant = ObservableList<Restaurant>.of([]);
 
   @computed
   bool get isFirstLoading {
-    return loading && listRestaurant.isEmpty;
+    return loadingRestaurants && listRestaurant.isEmpty;
   }
 
   @action
-  Future<void> getRestaurants(
-      {int cityId = 0, int count = 10, start = 0}) async {
-    loading = true;
+  Future<void> getRestaurants({
+    int cityId = 0,
+    int count = 10,
+    int start = 0,
+  }) async {
+    loadingRestaurants = true;
 
     if (start == 0) {
       listRestaurant.clear();
@@ -42,6 +63,6 @@ abstract class _RestaurantsControllerBase with Store {
       ),
     );
 
-    loading = false;
+    loadingRestaurants = false;
   }
 }

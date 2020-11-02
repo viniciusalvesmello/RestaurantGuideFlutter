@@ -1,5 +1,5 @@
+import 'package:RestaurantGuideFlutter/app/core/utils/functions/image.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,26 +10,18 @@ class CardRestaurantWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var restaurantImage = ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: 100,
-        maxHeight: 108,
-      ),
+    var restaurantImage = Container(
+      width: 90,
+      height: 90,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(4.0),
           bottomLeft: Radius.circular(4.0),
         ),
-        child: CachedNetworkImage(
-          imageUrl: restaurant.image,
-          placeholder: (context, url) => new Center(
-            child: Image.asset('assets/images/loading.gif'),
-          ),
-          errorWidget: (context, url, error) => new Center(
-            child: Image.asset('assets/images/no_image.png'),
-          ),
-          width: 100,
-          height: 108,
+        child: Image.network(
+          restaurant.image,
+          loadingBuilder: imageLoading(),
+          errorBuilder: imageError(),
           fit: BoxFit.cover,
         ),
       ),

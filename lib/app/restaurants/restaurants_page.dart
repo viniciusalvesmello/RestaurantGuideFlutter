@@ -82,7 +82,7 @@ class _RestaurantsPageState
                       );
                     }
 
-                    if (!controller.loading) {
+                    if (!controller.loadingRestaurants) {
                       return CardRestaurantWidget(
                         restaurant: controller.listRestaurant[index],
                       );

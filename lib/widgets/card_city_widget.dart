@@ -1,5 +1,5 @@
 import 'package:RestaurantGuideFlutter/app/cities/city/model/city_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:RestaurantGuideFlutter/app/core/utils/functions/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -11,21 +11,19 @@ class CardCityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cityImage = Expanded(
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(4.0),
-          topLeft: Radius.circular(4.0),
-        ),
-        child: CachedNetworkImage(
-          placeholder: (context, url) => new Center(
-            child: Image.asset('assets/images/loading.gif'),
+      child: Container(
+        height: 160,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(4.0),
+            topLeft: Radius.circular(4.0),
           ),
-          errorWidget: (context, url, error) => new Center(
-            child: Image.asset('assets/images/no_image.png'),
+          child: Image.network(
+            city.imageUrl,
+            loadingBuilder: imageLoading(),
+            errorBuilder: imageError(),
+            fit: BoxFit.cover,
           ),
-          imageUrl: city.imageUrl,
-          height: 160,
-          fit: BoxFit.cover,
         ),
       ),
     );
