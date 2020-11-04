@@ -1,5 +1,5 @@
 import 'package:RestaurantGuideFlutter/app/cities/city/model/city_model.dart';
-import 'package:RestaurantGuideFlutter/app/core/utils/functions/image.dart';
+import 'package:RestaurantGuideFlutter/app/core/utils/functions/image_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

@@ -1,5 +1,4 @@
 import 'package:RestaurantGuideFlutter/app/core/services/client_http_service.dart';
-import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/restaurant_controller.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/restaurant_page.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurants_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,10 +10,9 @@ class RestaurantsModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind<IRestaurantsRepository>((i) => RestaurantsRepository(
-              i.get<IClientHttpService>(),
+              client: i.get<IClientHttpService>(),
             )),
         Bind((i) => RestaurantsController()),
-        Bind((i) => RestaurantController()),
       ];
 
   @override

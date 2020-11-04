@@ -1,4 +1,4 @@
-import 'package:RestaurantGuideFlutter/app/core/utils/functions/image.dart';
+import 'package:RestaurantGuideFlutter/app/core/utils/functions/image_functions.dart';
 import 'package:RestaurantGuideFlutter/app/restaurants/restaurant/model/restaurant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

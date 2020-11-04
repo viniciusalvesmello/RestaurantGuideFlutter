@@ -15,7 +15,7 @@ class RestaurantsRepository implements IRestaurantsRepository {
   final IClientHttpService client;
   final apiVersion = "v2.1";
 
-  RestaurantsRepository(this.client);
+  RestaurantsRepository({this.client});
 
   @override
   Future<List<RestaurantCategory>> getRestaurantsCategories() async {
