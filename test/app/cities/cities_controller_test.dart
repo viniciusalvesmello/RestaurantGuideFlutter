@@ -1,6 +1,6 @@
 import 'package:RestaurantGuideFlutter/app/app_module.dart';
-import 'package:RestaurantGuideFlutter/app/cities/cities_controller.dart';
-import 'package:RestaurantGuideFlutter/app/cities/cities_module.dart';
+import 'package:RestaurantGuideFlutter/app/modules/cities/cities_controller.dart';
+import 'package:RestaurantGuideFlutter/app/modules/cities/cities_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';

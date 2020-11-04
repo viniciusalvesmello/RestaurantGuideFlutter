@@ -1,10 +1,9 @@
-import 'package:RestaurantGuideFlutter/app/app_widget.dart';
-import 'package:RestaurantGuideFlutter/app/cities/cities_module.dart';
-import 'package:RestaurantGuideFlutter/app/restaurants/restaurants_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
+import 'app_widget.dart';
 import 'core/services/client_http_service.dart';
+import 'modules/cities/cities_module.dart';
+import 'modules/restaurants/restaurants_module.dart';
 
 class AppModule extends MainModule {
   @override

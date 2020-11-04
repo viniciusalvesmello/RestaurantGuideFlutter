@@ -1,6 +1,5 @@
+import 'package:RestaurantGuideFlutter/app/core/services/client_http_interceptor.dart';
 import 'package:dio/dio.dart';
-
-import 'client_http_interceptor.dart';
 
 abstract class IClientHttpService {
   Future get(String path);

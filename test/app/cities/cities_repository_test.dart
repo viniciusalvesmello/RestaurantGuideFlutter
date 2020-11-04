@@ -1,9 +1,8 @@
-import 'package:RestaurantGuideFlutter/app/cities/cities_repository.dart';
-import 'package:RestaurantGuideFlutter/app/cities/city/model/city_model.dart';
+import 'package:RestaurantGuideFlutter/app/modules/cities/cities_repository.dart';
+import 'package:RestaurantGuideFlutter/app/modules/cities/city/model/city_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
-  
   test('when get list cities should get data with success', () {
     final ICitiesRepository repository = CitiesRepository();
     final List<City> list = repository.getCities();
